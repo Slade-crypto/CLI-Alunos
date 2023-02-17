@@ -1,6 +1,10 @@
+import '../../repositories/student_dio_repository.dart';
+import 'subcommands/delete_command.dart';
+import 'subcommands/find_by_id.dart';
+import 'subcommands/insert_command.dart';
+import 'subcommands/update_command.dart';
 import 'package:args/command_runner.dart';
 
-import '../../repositories/student_repository.dart';
 import 'subcommands/find_all_command.dart';
 
 class StudentsCommand extends Command {
@@ -11,7 +15,11 @@ class StudentsCommand extends Command {
   String get name => 'students';
 
   StudentsCommand() {
-    final studentRepository = StudentRepository();
+    final studentRepository = StudentDioRepository();
     addSubcommand(FindAllCommand(studentRepository));
+    addSubcommand(FindByIdCommand(studentRepository));
+    addSubcommand(InsertCommand(studentRepository));
+    addSubcommand(UpdateCommand(studentRepository));
+    addSubcommand(DeleteCommand(studentRepository));
   }
 }

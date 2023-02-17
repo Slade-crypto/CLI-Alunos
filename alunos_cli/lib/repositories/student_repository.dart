@@ -4,7 +4,7 @@ import '../models/users_model.dart';
 import 'package:http/http.dart' as http;
 
 class StudentRepository {
-  Future<Users> findAll() async {
+  Future<List<Users>> findAll() async {
     final response = await http.get(Uri.parse('http://localhost:8080/students'));
 
     if (response.statusCode != 200) {
@@ -26,13 +26,11 @@ class StudentRepository {
       throw Exception();
     }
 
-    final data = jsonDecode(response.body);
-
-    if (data.isEmpty || data == '{}') {
+    if (response.body == '{}') {
       throw Exception();
     }
 
-    return Users.fromJson(data.body);
+    return Users.fromJson(response.body);
   }
 
   Future<void> insert(Users student) async {

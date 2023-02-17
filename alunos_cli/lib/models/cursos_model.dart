@@ -4,7 +4,7 @@ import 'dart:convert';
 class Cursos {
   final int id;
   final String name;
-  final bool isAluno;
+  bool isAluno;
   Cursos({
     required this.id,
     required this.name,
